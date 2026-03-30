@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience Wall V2</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Experience Wall V2</h1>
+            <form id="postForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+
+                <label for="role">Role:</label>
+                <select id="role">
+                    <option value="Other">Other</option>
+                    <option value="User">User</option>
+                    <option value="Admin">Admin</option>
+                </select>
+
+                <label for="question">Frage:</label>
+                <input type="text" id="question" required>
+
+                <button type="submit">Submit</button>
+            </form>
+        </header>
+
+        <div class="filterBar">
+            <input type="text" id="search" placeholder="Search...">
+            <select id="categoryFilter">
+                <option value="All">All Categories</option>
+                <option value="Category1">Category 1</option>
+                <option value="Category2">Category 2</option>
+            </select>
+            <select id="roleFilter">
+                <option value="All">All Roles</option>
+                <option value="User">User</option>
+                <option value="Admin">Admin</option>
+            </select>
+            <button id="sort">Sort</button>
+        </div>
+
+        <main>
+            <section id="feed">
+                <!-- Posts will be loaded here -->
+            </section>
+            <aside id="tipsPanel">
+                <h2>Tips & Best Practices</h2>
+                <ul id="tipsList">
+                    <!-- Tips will be loaded here -->
+                </ul>
+                <form id="tipForm">
+                    <input type="text" id="tip" placeholder="Add a tip...">
+                    <button type="submit">Add Tip</button>
+                </form>
+            </aside>
+        </main>
+    </div>
+
+    <script>
+        // LocalStorage Migration
+        const migrateLocalStorage = () => {
+            const v1Posts = JSON.parse(localStorage.getItem('epg_wall_posts')) || [];
+            const v2Posts = v1Posts.map(post => {
+                return {
+                    message: post.message,
+                    category: post.category,
+                    name: post.name || 'Unbekannt',
+                    role: post.role || '(unbekannt)'
+                };
+            });
+            localStorage.setItem('epg_wall_posts_v2', JSON.stringify(v2Posts));
+        };
+        migrateLocalStorage();
+
+        // Functionality to open posts in modal and add comments will go here.
+    </script>
+</body>
+</html>
