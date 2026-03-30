@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Erfahrungswand – Ersthelfer*innen Psychische Gesundheit</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f4f6f9;
+      color: #2d3748;
+      line-height: 1.6;
+      padding: 1rem;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+    }
+
+    .header h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #2b6cb0;
+      margin-bottom: 0.5rem;
+    }
+
+    .header p {
+      font-size: 0.95rem;
+      color: #4a5568;
+      margin-bottom: 0.75rem;
+    }
+
+    .disclaimer {
+      background: #ebf8ff;
+      border-left: 3px solid #63b3ed;
+      border-radius: 6px;
+      padding: 0.6rem 0.9rem;
+      font-size: 0.85rem;
+      color: #2c5282;
+    }
+
+    /* Form */
+    .form-card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+    }
+
+    .form-card h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #4a5568;
+      margin-bottom: 1rem;
+    }
+
+    .field {
+      margin-bottom: 0.85rem;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #4a5568;
+      margin-bottom: 0.3rem;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
+      padding: 0.55rem 0.75rem;
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: #2d3748;
+      background: #f7fafc;
+      transition: border-color 0.15s;
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: #63b3ed;
+      background: #fff;
+    }
+
+    .field textarea { min-height: 90px; }
+
+    .safety-note {
+      font-size: 0.8rem;
+      color: #718096;
+      margin-bottom: 1rem;
+    }
+
+    .btn-submit {
+      background: #3182ce;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.6rem 1.4rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-submit:hover { background: #2b6cb0; }
+    .btn-submit:active { background: #2c5282; }
+
+    /* Feed */
+    .feed-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #718096;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .empty-state {
+      text-align: center;
+      color: #a0aec0;
+      font-size: 0.9rem;
+      padding: 2rem 0;
+    }
+
+    /* Post card */
+    .post-card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 1.1rem 1.4rem;
+      margin-bottom: 0.9rem;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+    }
+
+    .post-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #bee3f8;
+      color: #2b6cb0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .post-meta { flex: 1; min-width: 0; }
+
+    .post-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #2d3748;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .post-time {
+      font-size: 0.78rem;
+      color: #a0aec0;
+    }
+
+    .badge {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .badge-Erfahrung  { background: #c6f6d5; color: #276749; }
+    .badge-Frage      { background: #bee3f8; color: #2c5282; }
+    .badge-Hinweis    { background: #fefcbf; color: #744210; }
+    .badge-Ressource  { background: #e9d8fd; color: #553c9a; }
+
+    .post-message {
+      font-size: 0.93rem;
+      color: #4a5568;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    @media (max-width: 480px) {
+      .header, .form-card { padding: 1.2rem 1.1rem; }
+      .header h1 { font-size: 1.15rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="header">
+      <h1>Austausch für Ersthelfer*innen Psychische Gesundheit</h1>
+      <p>
+        Hier könnt ihr Erfahrungen teilen, Fragen stellen und Ressourcen empfehlen –
+        ein geschützter Raum für alle, die anderen in psychischen Notlagen beistehen.
+      </p>
+      <div class="disclaimer">
+        <strong>Hinweis:</strong> Diese Pinnwand ersetzt keine professionelle psychologische Beratung oder Behandlung.
+        Bei akuten Krisen bitte immer Fachkräfte oder den Notruf kontaktieren.
+      </div>
+    </header>
+
+    <!-- Input form -->
+    <section class="form-card">
+      <h2>Beitrag verfassen</h2>
+
+      <div class="field">
+        <label for="input-name">Name oder Rolle</label>
+        <input id="input-name" type="text" placeholder="z. B. Ersthelfer*in, Teamlead, anonym" maxlength="80" />
+      </div>
+
+      <div class="field">
+        <label for="input-category">Kategorie</label>
+        <select id="input-category">
+          <option value="Erfahrung">Erfahrung</option>
+          <option value="Frage">Frage</option>
+          <option value="Hinweis">Hinweis</option>
+          <option value="Ressource">Ressource</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="input-message">Beitrag</label>
+        <textarea id="input-message" placeholder="Was möchtest du teilen?" maxlength="1000"></textarea>
+      </div>
+
+      <p class="safety-note">
+        Datenschutz: Bitte keine sensiblen oder identifizierenden Personendaten posten.
+      </p>
+
+      <button class="btn-submit" id="btn-submit">Beitrag teilen</button>
+    </section>
+
+    <!-- Feed -->
+    <div class="feed-title">Beiträge</div>
+    <div id="feed"></div>
+
+  </div>
+
+  <script>
+    var STORAGE_KEY = 'epg_wall_posts';
+
+    function loadPosts() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function savePosts(posts) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+    }
+
+    function getInitials(name) {
+      var parts = name.trim().split(/\s+/).slice(0, 2);
+      return parts.map(function (p) { return p.charAt(0).toUpperCase(); }).join('') || 'A';
+    }
+
+    function escapeHtml(text) {
+      return text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function formatTime(iso) {
+      var d = new Date(iso);
+      return d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' }) +
+             ' ' + d.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' }) + ' Uhr';
+    }
+
+    function renderPost(post) {
+      var initials = getInitials(post.name || 'A');
+      var name = escapeHtml(post.name || 'Anonym');
+      var message = escapeHtml(post.message);
+      var category = escapeHtml(post.category);
+      var time = formatTime(post.createdAt);
+
+      return '<div class="post-card">' +
+        '<div class="post-header">' +
+          '<div class="avatar">' + escapeHtml(initials) + '</div>' +
+          '<div class="post-meta">' +
+            '<div class="post-name">' + name + '</div>' +
+            '<div class="post-time">' + time + '</div>' +
+          '</div>' +
+          '<span class="badge badge-' + category + '">' + category + '</span>' +
+        '</div>' +
+        '<div class="post-message">' + message + '</div>' +
+      '</div>';
+    }
+
+    function renderFeed() {
+      var feed = document.getElementById('feed');
+      var posts = loadPosts();
+      if (posts.length === 0) {
+        feed.innerHTML = '<div class="empty-state">Noch keine Beiträge. Schreibe den ersten Beitrag!</div>';
+        return;
+      }
+      feed.innerHTML = posts.map(renderPost).join('');
+    }
+
+    document.getElementById('btn-submit').addEventListener('click', function () {
+      var nameEl = document.getElementById('input-name');
+      var categoryEl = document.getElementById('input-category');
+      var messageEl = document.getElementById('input-message');
+
+      var message = messageEl.value.trim();
+      if (!message) {
+        messageEl.focus();
+        return;
+      }
+
+      var post = {
+        id: Date.now().toString(36) + Math.random().toString(36).slice(2),
+        name: nameEl.value.trim() || 'Anonym',
+        category: categoryEl.value,
+        message: message,
+        createdAt: new Date().toISOString()
+      };
+
+      var posts = loadPosts();
+      posts.unshift(post);
+      savePosts(posts);
+
+      nameEl.value = '';
+      messageEl.value = '';
+      categoryEl.selectedIndex = 0;
+
+      renderFeed();
+      document.getElementById('feed').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    renderFeed();
+  </script>
+</body>
+</html>
